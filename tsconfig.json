@@ -1,0 +1,64 @@
+{
+	"exclude": [
+		"node_modules"
+	],
+	"compilerOptions": {
+		"lib": [
+			"es6"
+		],
+		"strict": true,
+		"strictPropertyInitialization": false,
+		"target": "ES6",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"baseUrl": "./",
+		"paths": {
+			"#Api/app": [
+				"./src/app.ts"
+			],
+			"#Api/BaseEntity": [
+				"./src/baseEntity.ts"
+			],
+			"#Api/config/*": [
+				"./config/*"
+			],
+			"#Api/constants": [
+				"./src/lib/constants.ts"
+			],
+			"#Api/DataSource": [
+				"./src/dataSource.ts"
+			],
+			"#Api/enums": [
+				"./src/lib/enums.js"
+			],
+			"#Api/entities/*": [
+				"./src/routes/*.entities.ts"
+			],
+			"#Api/errors": [
+				"src/lib/errors.ts"
+			],
+			"#Api/helpers": [
+				"./src/lib/helpers"
+			],
+			"#Api/interfaces": [
+				"./src/lib/apiInterfaces"
+			],
+			"#Api/middlewares": [
+				"./src/lib/middlewares"
+			],
+			"#Api/routes/*": [
+				"./src/routes/*.routes.ts"
+			],
+			"#Api/types": [
+				"./src/lib/types.ts"
+			]
+		}
+	}
+}

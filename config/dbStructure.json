@@ -1,0 +1,8 @@
+{
+    "schemaName": "healthApp",
+    "tables": {
+        "users": "users",
+        "foods": "foods",
+        "diaries": "diaries"
+    }
+}

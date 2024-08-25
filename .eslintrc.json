@@ -1,0 +1,141 @@
+{
+	"env": {
+		"commonjs": true,
+		"es2021": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint"
+	],
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+	"settings": {
+		"import/resolver": {
+			"webpack": {
+				"extensions": [
+					".ts"
+				]
+			},
+			"node": {
+				"extensions": [
+					".ts",
+					".json"
+				]
+			}
+		}
+	},
+	"rules": {
+		// converts x.map((y) => y) to x.map(y => y)
+		"arrow-parens": [
+			"warn",
+			"as-needed"
+		],
+		// displays warning whenever console.log() is used
+		"no-console": "warn",
+		"max-classes-per-file": "off",
+		"prefer-destructuring": [
+			"error",
+			{
+				"object": true,
+				"array": false
+			}
+		],
+		"jest/expect-expect": [
+			"off",
+			{
+				"assertFunctionNames": [
+					"expect"
+				]
+			}
+		],
+		"jest/no-conditional-expect": [
+			"off",
+			{
+				"assertFunctionNames": [
+					"expect"
+				]
+			}
+		],
+		"function-paren-newline": 0,
+		"prefer-template": "off",
+		"indent": [
+			"error",
+			4,
+			{
+				"SwitchCase": 1, // Optional: Indent case clauses in switch statements
+				"VariableDeclarator": "first", // Align variable declarators in multi-line statements
+				"MemberExpression": 1, // Indent multi-line member expressions
+				"ignoredNodes": [
+					"TemplateLiteral *"
+				] // Ignore indenting within template literals
+			}
+		],
+		"brace-style": [
+			"error",
+			"1tbs",
+			{
+				"allowSingleLine": true
+			}
+		],
+		"comma-spacing": [
+			"warn",
+			{
+				"before": false,
+				"after": true
+			}
+		],
+		"semi": [
+			2,
+			"always"
+		],
+		"import/order": "off",
+		// displays a warning if more than 175 characters are included in single line
+		"max-len": [
+			"warn",
+			175
+		],
+		// turns off warnings/errors when using tab spacing
+		"no-tabs": 0,
+		"no-restricted-syntax": "off",
+		// turns off warnings/errors when reassigning the value of an input prop
+		"no-param-reassign": "off",
+		"no-await-in-loop": "off",
+		"no-async-promise-executor": "off",
+		// makes it so that linting does not add a new line following open curly braces
+		"object-curly-newline": "off",
+		// displays error if items within curly braces are not spaced {x,y,z} ==> { x, y, z }
+		"object-curly-spacing": [
+			"error",
+			"always"
+		],
+		"no-continue": [
+			"warn"
+		],
+		"@typescript-eslint/no-namespace": "warn",
+		"no-nested-ternary": [
+			"warn"
+		],
+		"no-mixed-spaces-and-tabs": 0,
+		"@typescript-eslint/no-unused-vars": 0,
+		"array-element-newline": [
+			"error",
+			"consistent"
+		],
+		"array-bracket-newline": [
+			"error",
+			"consistent"
+		],
+		"comma-dangle": [
+			"error",
+			"always-multiline"
+		]
+	}
+}
