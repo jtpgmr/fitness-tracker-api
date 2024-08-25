@@ -1,1 +1,21 @@
-{}
+{
+    "workbench.sideBar.location": "right",
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 2,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.ts": "explicit"
+    },
+    "javascript.format.semicolons": "insert",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "eslint.format.enable": true,
+    "eslint.debug": true,
+    "eslint.enable": true,
+    "editor.formatOnSave": true,
+    "eslint.run": "onType",
+}
