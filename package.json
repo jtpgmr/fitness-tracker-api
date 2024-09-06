@@ -18,7 +18,7 @@
 			"./src/routes/*.entities.ts"
 		],
 		"#Api/errors": "./src/lib/errors.ts",
-		"#Api/interfaces": "./src/lib/apiInterfaces/index.ts",
+		"#Api/connectors": "./src/lib/externalConnectors/index.ts",
 		"#Api/helpers": "./src/lib/helpers/index.ts",
 		"#Api/middlewares": "./src/lib/middlewares/index.ts",
 		"#Api/routes/*": [
@@ -46,13 +46,17 @@
 		"typescript": "5.1.6"
 	},
 	"dependencies": {
+		"@aws-sdk/client-cognito-identity-provider": "^3.637.0",
+		"@aws-sdk/credential-providers": "^3.637.0",
 		"@dotenvx/dotenvx": "^1.7.0",
 		"axios": "^1.5.0",
 		"class-transformer": "^0.5.1",
 		"cors": "^2.8.5",
 		"express": "^4.17.2",
+		"express-jwt": "^8.4.1",
 		"helmet": "^7.0.0",
 		"joi": "^17.10.1",
+		"jwks-rsa": "^3.1.0",
 		"pg": "^8.4.0",
 		"pino-http": "^10.2.0",
 		"reflect-metadata": "^0.1.13",

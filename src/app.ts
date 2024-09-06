@@ -6,6 +6,7 @@ import { pinoHttp } from 'pino-http';
 
 import RootApiRoutes from './routes';
 import { applyRouteToRouter } from '#Api/helpers';
+import { verifyJwt } from '#Api/middlewares';
 import { handleNotFound } from '#Api/middlewares';
 import { PaginationResult } from '#Api/types';
 
@@ -26,6 +27,10 @@ declare module 'express-serve-static-core' {
     }
 }
 
+const { JWT_ALGORITHMS, JWT_ISSUER, JWT_JWKS_URI } = process.env;
+
+if (!JWT_ALGORITHMS || !JWT_ISSUER || !JWT_JWKS_URI) throw new Error('verifyJwt configs not properly set');
+
 // only log warning levels and above
 export const appLogger = pino({ level: 'info' });
 
@@ -37,6 +42,7 @@ app.use(helmet());
 
 app.use(cors());
 
+// app logging configs
 app.use(
     pinoHttp({
         logger: appLogger,
@@ -53,6 +59,13 @@ app.use(express.json({ limit: '50mb' }));
 const router: Router = express.Router({ mergeParams: true });
 
 app.use('/health', (req, res) => res.status(200).send('Ok'));
+
+// jwt checking middleware (checks Bearer token in Authorization header)
+app.use(verifyJwt({
+    algorithms: JWT_ALGORITHMS,
+    issuer: JWT_ISSUER,
+    jwksUri: JWT_JWKS_URI,
+}));
 
 app.use('/api', RootApiRoutes.map(route => applyRouteToRouter(route, router)));
 

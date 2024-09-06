@@ -1,0 +1,1 @@
+export { default as CognitoInterface } from './awsCognitoConnector';

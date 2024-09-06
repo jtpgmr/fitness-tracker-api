@@ -55,3 +55,11 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+*/__tests__
+
+# Root Directory JS/TS files
+/!index.ts
+/!jest.config.js
+/*.js
+/*.ts

@@ -31,3 +31,58 @@ create table if not exists "healthApp"."diaries" (
     "deletedBy" uuid NULL references "healthApp"."users"("id")
 );
 
+-- Food Data
+create table if not exists "healthApp"."foods" (
+    "serialId" int4 generated always as identity primary key,
+    "id" uuid unique not null,
+    "edamamId" uuid unique not null,
+    "edamamFoodId" char(33) unique not null,
+    "name" varchar(250) not null,
+    "aliases" jsonb null,
+    "category" varchar(50) not null,
+    "categoryLabel" varchar(50) not null,
+    "brand" varchar(100) null,
+    "healthLabels" jsonb null,
+    "cautions" jsonb null,
+    "createdAt" timestamptz not null default now(),
+	"updatedAt" timestamptz null,
+    "deletedAt" timestamptz null
+);
+
+create table if not exists "healthApp"."nutritionData" (
+    "serialId" int4 generated always as identity primary key,
+    "id" uuid unique not null,
+	"foodId" uuid not null references "healthApp"."foods"("id"),
+    "contents" jsonb null,
+    "calories" int4 not null,
+    "servingWeight" int4 not null,
+    "units" varchar(20) not null,
+    "createdAt" timestamptz not null default now(),
+	"updatedAt" timestamptz null,
+    "deletedAt" timestamptz null
+);
+
+-- Exercises Data
+create table if not exists "healthApp"."exercises" (
+    "serialId" int4 generated always as identity primary key,
+    "id" uuid unique not null,
+	"name" varchar(250) NOT NULL,
+	"description" varchar(250) NULL,
+    "calories" int4 not null,
+    "units" varchar(20) not null, -- enum,
+    "createdAt" timestamptz not null default now(),
+	"updatedAt" timestamptz null,
+    "deletedAt" timestamptz null
+);
+
+-- Workout Data
+create table if not exists "healthApp"."workouts" (
+    "serialId" int4 generated always as identity primary key,
+    "id" uuid unique not null,
+    "userId" uuid NOT null references "healthApp"."users"("id"),
+    "exercises" jsonb null, -- accepts an array of exerciseIds
+    "checkInTime" timestamptz null,
+    "checkOutTime" timestamptz null,
+	"updatedAt" timestamptz null,
+    "deletedAt" timestamptz null
+);

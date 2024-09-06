@@ -57,7 +57,6 @@ export const createOne = async <T extends APIBaseEntity>({ repository, objectTyp
         const records: T[] = await getAll({ repository, where: conflictCheckFields });
 
         if (records.length > 0) {
-            console.log(555, conflictCheckFields);
             throw new RecordConflictError(objectType, conflictCheckFields);
         }
     }

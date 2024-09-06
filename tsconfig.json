@@ -47,8 +47,8 @@
 			"#Api/helpers": [
 				"./src/lib/helpers"
 			],
-			"#Api/interfaces": [
-				"./src/lib/apiInterfaces"
+			"#Api/connectors": [
+				"src/lib/externalConnectors"
 			],
 			"#Api/middlewares": [
 				"./src/lib/middlewares"
