@@ -53,13 +53,6 @@ class APIBaseEntity extends BaseEntity implements APIBaseEntityBehavior {
         throw new Error('columnForeignKeyConstraintName not implemented.');
     }
 
-    // constructor({ serialId, id }: APIBaseEntityProps) {
-    // 	super()
-    // 	this.serialId = serialId;
-    // 	this.id = id;
-    // }
-
-
     static _tableName: string;
 
     // Method to set the table name
@@ -85,7 +78,6 @@ class APIBaseEntity extends BaseEntity implements APIBaseEntityBehavior {
 
 	static columnForeignKeyConstraintName = (columnName: string, customConstraintName?: string): string =>
 	    customConstraintName || `${APIBaseEntity._tableName}_${columnName}_fkey`;
-
 
 	static generateUserAuditColumn(options: UserAuditColumnOptions): PropertyDecorator {
 	    return Column({

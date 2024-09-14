@@ -7,7 +7,7 @@ create table if not exists "healthApp"."users" (
 	"firstName" varchar(150) NOT NULL,
 	"lastName" varchar(150) NOT NULL,
 	"email" varchar(150) NOT NULL,
-	"cognitoId" varchar(150) NOT NULL,
+	"authProviderId" varchar(150) NOT NULL,
     "createdAt" timestamptz not null default now(),
     "createdBy" uuid NOT NULL references "healthApp"."users"("id"),
 	"updatedAt" timestamptz null,
@@ -15,6 +15,39 @@ create table if not exists "healthApp"."users" (
     "deletedAt" timestamptz null,
     "deletedBy" uuid NULL references "healthApp"."users"("id")
 );
+
+create table if not exists "healthApp"."foodDataSource" (
+    "serialId" int4 generated always as identity primary key,
+    "id" uuid unique not null,
+    "name" varchar not null,
+    "code" varchar not null,
+    "description" varchar null,
+    "createdAt" timestamptz not null default now(),
+    "createdBy" uuid NOT NULL references "healthApp"."users"("id"),
+	"updatedAt" timestamptz null,
+    "updatedBy" uuid NULL references "healthApp"."users"("id"),
+    "deletedAt" timestamptz null,
+    "deletedBy" uuid NULL references "healthApp"."users"("id")
+);
+
+-- need to add food data source
+-- Food Data
+create table if not exists "healthApp"."foods" (
+    "serialId" int4 generated always as identity primary key,
+    "id" uuid unique not null,
+    "sourceId" uuid unique not null,
+    "name" varchar(250) not null,
+    "aliases" jsonb null,
+    "category" varchar(50) not null,
+    "categoryLabel" varchar(50) not null,
+    "brand" varchar(100) null,
+    "healthLabels" jsonb null,
+    "cautions" jsonb null,
+    "createdAt" timestamptz not null default now(),
+	"updatedAt" timestamptz null,
+    "deletedAt" timestamptz null
+);
+
 
 -- User Food Diaries Data
 create table if not exists "healthApp"."diaries" (
@@ -29,24 +62,6 @@ create table if not exists "healthApp"."diaries" (
     "updatedBy" uuid NULL references "healthApp"."users"("id"),
     "deletedAt" timestamptz null,
     "deletedBy" uuid NULL references "healthApp"."users"("id")
-);
-
--- Food Data
-create table if not exists "healthApp"."foods" (
-    "serialId" int4 generated always as identity primary key,
-    "id" uuid unique not null,
-    "edamamId" uuid unique not null,
-    "edamamFoodId" char(33) unique not null,
-    "name" varchar(250) not null,
-    "aliases" jsonb null,
-    "category" varchar(50) not null,
-    "categoryLabel" varchar(50) not null,
-    "brand" varchar(100) null,
-    "healthLabels" jsonb null,
-    "cautions" jsonb null,
-    "createdAt" timestamptz not null default now(),
-	"updatedAt" timestamptz null,
-    "deletedAt" timestamptz null
 );
 
 create table if not exists "healthApp"."nutritionData" (

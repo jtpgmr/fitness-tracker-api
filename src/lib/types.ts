@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, IRouterMatcher } from 'express';
+import { NextFunction, Request, Response, IRouterMatcher, RouterOptions } from 'express';
 import { Schema } from 'joi';
 import { APIError, ValidationError } from './errors';
 import BaseEntity from '#Api/BaseEntity';
@@ -43,7 +43,8 @@ export type Route = {
 	subRoutes?: Record<string, Route>;
 	middlewares?: ((req: Request, res: Response, next: NextFunction) => Promise<NextFunction>)[];
 	endpoints: Endpoints;
-	entity: typeof APIBaseEntity
+	entity: typeof APIBaseEntity;
+	options?: RouterOptions;
 };
 
 export type PaginateOptions = {

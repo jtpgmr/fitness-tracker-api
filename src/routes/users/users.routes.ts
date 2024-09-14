@@ -14,6 +14,7 @@ const userRoutePath = '/users';
 export const userSubRoutePath = userRoutePath + '/:id';
 
 const Routes: Route = {
+    options: { mergeParams: true },
     entity: User,
     subRoutes: {
         // [userSubRoutePath]: DiariesRoutes,

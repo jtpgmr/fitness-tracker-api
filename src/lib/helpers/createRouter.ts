@@ -6,9 +6,10 @@ import createErrorObj from './createErrorObj';
 import { APIError, UnknownServerError, ValidationError } from '#Api/errors';
 import paginator from './paginator';
 
-const applyRouteToRouter = (route: Route, expressRouter: Router): Router => {
+const createRouter = (route: Route): Router => {
+    const router = Router(route.options || {});
     // check if route has protector middleware functions and execute them
-    if (route.middlewares && route.middlewares.length > 0) route.middlewares.forEach(mw => expressRouter.use(mw));
+    if (route.middlewares && route.middlewares.length > 0) route.middlewares.forEach(mw => router.use(mw));
 
     // iterate over all defined endpoints
     Object.entries(route.endpoints).forEach(([httpMethod, endpoint]) => {
@@ -16,7 +17,7 @@ const applyRouteToRouter = (route: Route, expressRouter: Router): Router => {
             throw new Error('Controllers not set');
         }
         const methodLowerCase = httpMethod.toLowerCase() as Lowercase<HttpMethod>;
-        expressRouter[methodLowerCase](endpoint.path, async (req: Request, res: Response) => {
+        router[methodLowerCase](endpoint.path, async (req: Request, res: Response) => {
             const requestValidator = endpoint.validator;
             if (requestValidator) {
                 const errors: ErrorObject[] = [];
@@ -87,12 +88,12 @@ const applyRouteToRouter = (route: Route, expressRouter: Router): Router => {
     if (route.subRoutes) {
         Object.entries(route.subRoutes).forEach(([path, subRoute]) => {
             const subRouter = Router();
-            applyRouteToRouter(subRoute, expressRouter);
-            expressRouter.use(path, subRouter);
+            createRouter(subRoute);
+            router.use(path, subRouter);
         });
     }
 
-    return expressRouter;
+    return router;
 };
 
-export default applyRouteToRouter;
+export default createRouter;

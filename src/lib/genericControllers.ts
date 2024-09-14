@@ -31,6 +31,14 @@ interface UpdateOne<T extends APIBaseEntity> extends EffectResource<T> {
 	conflictCheckFields?: FindOptionsWhere<T>;
 }
 
+// type QueryUUIDSegment = {
+
+// }
+
+const getUUIDSegment = () => {
+    
+};
+
 export const getAll = async <T extends APIBaseEntity>({
     repository,
     limit,
@@ -46,7 +54,8 @@ export const getAll = async <T extends APIBaseEntity>({
     return instanceToPlain(records) as T[];
 };
 
-export const createOne = async <T extends APIBaseEntity>({ repository, objectType, createFields, conflictCheckFields = {} }: CreateOne<T>): Promise<T> => {
+// uuidSegmentWhere
+export const createOne = async <T extends APIBaseEntity>({ repository, objectType, createFields, conflictCheckFields = {}  }: CreateOne<T>): Promise<T> => {
     const conflictFieldEntries = Object.entries(conflictCheckFields);
 
     if (conflictFieldEntries.length > 0) {
