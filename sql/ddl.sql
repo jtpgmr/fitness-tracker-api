@@ -7,7 +7,7 @@ create table if not exists "healthApp"."users" (
 	"firstName" varchar(150) NOT NULL,
 	"lastName" varchar(150) NOT NULL,
 	"email" varchar(150) NOT NULL,
-	"authProviderId" varchar(150) NOT NULL,
+	"cognitoId" varchar(150) NOT NULL,
     "createdAt" timestamptz not null default now(),
     "createdBy" uuid NOT NULL references "healthApp"."users"("id"),
 	"updatedAt" timestamptz null,
